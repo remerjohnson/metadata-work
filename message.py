@@ -3,9 +3,7 @@ import time
 
 program_message = \
 '''
-Thanks for checking out out Gooey!
-
-This is a sample message to demonstrate Gooey's functionality.
+Thanks for checking out out my program.
 
 Here are the arguments you supplied:
 
@@ -13,14 +11,12 @@ Here are the arguments you supplied:
 
 -------------------------------------
 
-Gooey is an ongoing project, so feel free to submit any bugs you find to the
-issue tracker on Github[1], or drop me a line at audionautic@gmail.com if ya want.
+This project was made using Gooey. If you'd like to contribute, you can find the
+author's issue tracker on Github[1]. 
 
 [1](https://github.com/chriskiehl/Gooey)
 
-See ya!
 
-^_^
 
 '''
 

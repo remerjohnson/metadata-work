@@ -6,6 +6,7 @@ import numpy as np
 '''The Object Structurer: A script to make DAMS-structured objects from staging folders
 
 Step 1: Have the user provide the root directory we want to look at
+
 An example path to try: /mnt/digital-staging/Mexican-Broadsides/batch2/Working_Files'''
 
 user_path = input("Enter the absolute path of the directory containing all objects: ")

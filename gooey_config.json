@@ -55,19 +55,19 @@
           "name": "Required Arguments",
           "items": [
             {
-              "id": "FileChooser",
+              "id": "file_input",
               "type": "FileChooser",
               "cli_type": "positional",
               "required": true,
               "data": {
-                "display_name": "FileChooser",
+                "display_name": "file_input",
                 "help": "Name of the file you want to process",
                 "required": true,
                 "nargs": "",
                 "commands": [],
                 "choices": [],
                 "default": null,
-                "dest": "FileChooser"
+                "dest": "file_input"
               },
               "options": {
                 "error_color": "#ea7878",
@@ -81,19 +81,19 @@
               }
             },
             {
-              "id": "DirectoryChooser",
+              "id": "output_directory",
               "type": "DirChooser",
               "cli_type": "positional",
               "required": true,
               "data": {
-                "display_name": "DirectoryChooser",
-                "help": "Name of the file you want to process",
+                "display_name": "output_directory",
+                "help": "Where you would like to save the output",
                 "required": true,
                 "nargs": "",
                 "commands": [],
                 "choices": [],
                 "default": null,
-                "dest": "DirectoryChooser"
+                "dest": "output_directory"
               },
               "options": {
                 "error_color": "#ea7878",
@@ -104,234 +104,6 @@
                 "external_validator": {
                   "cmd": ""
                 }
-              }
-            },
-            {
-              "id": "FileSaver",
-              "type": "FileSaver",
-              "cli_type": "positional",
-              "required": true,
-              "data": {
-                "display_name": "FileSaver",
-                "help": "Name of the file you want to process",
-                "required": true,
-                "nargs": "",
-                "commands": [],
-                "choices": [],
-                "default": null,
-                "dest": "FileSaver"
-              },
-              "options": {
-                "error_color": "#ea7878",
-                "validator": {
-                  "test": "user_input and not user_input.isspace()",
-                  "message": "This field is required"
-                },
-                "external_validator": {
-                  "cmd": ""
-                }
-              }
-            },
-            {
-              "id": "MultiFileSaver",
-              "type": "MultiFileChooser",
-              "cli_type": "positional",
-              "required": true,
-              "data": {
-                "display_name": "MultiFileSaver",
-                "help": "Name of the file you want to process",
-                "required": true,
-                "nargs": "",
-                "commands": [],
-                "choices": [],
-                "default": null,
-                "dest": "MultiFileSaver"
-              },
-              "options": {
-                "error_color": "#ea7878",
-                "validator": {
-                  "test": "user_input and not user_input.isspace()",
-                  "message": "This field is required"
-                },
-                "external_validator": {
-                  "cmd": ""
-                }
-              }
-            },
-            {
-              "id": "directory",
-              "type": "TextField",
-              "cli_type": "positional",
-              "required": true,
-              "data": {
-                "display_name": "directory",
-                "help": "Directory to store output",
-                "required": true,
-                "nargs": "",
-                "commands": [],
-                "choices": [],
-                "default": null,
-                "dest": "directory"
-              },
-              "options": {
-                "error_color": "#ea7878",
-                "validator": {
-                  "test": "user_input and not user_input.isspace()",
-                  "message": "This field is required"
-                },
-                "external_validator": {
-                  "cmd": ""
-                }
-              }
-            }
-          ],
-          "groups": [],
-          "description": null,
-          "options": {
-            "columns": 2,
-            "padding": 10,
-            "show_border": false
-          }
-        },
-        {
-          "name": "Optional Arguments",
-          "items": [
-            {
-              "id": "-w",
-              "type": "TextField",
-              "cli_type": "optional",
-              "required": false,
-              "data": {
-                "display_name": "writelog",
-                "help": "Dump output to local file",
-                "required": false,
-                "nargs": "",
-                "commands": [
-                  "-w",
-                  "--writelog"
-                ],
-                "choices": [],
-                "default": "writelogs",
-                "dest": "writelog"
-              },
-              "options": {
-                "error_color": "#ea7878",
-                "validator": {
-                  "test": "True",
-                  "message": ""
-                },
-                "external_validator": {
-                  "cmd": ""
-                }
-              }
-            },
-            {
-              "id": "-e",
-              "type": "CheckBox",
-              "cli_type": "optional",
-              "required": false,
-              "data": {
-                "display_name": "error",
-                "help": "Stop process on error (default: No)",
-                "required": false,
-                "nargs": "",
-                "commands": [
-                  "-e",
-                  "--error"
-                ],
-                "choices": [],
-                "default": false,
-                "dest": "error"
-              },
-              "options": {
-                "error_color": "#ea7878",
-                "validator": {
-                  "test": "True",
-                  "message": ""
-                },
-                "external_validator": {
-                  "cmd": ""
-                }
-              }
-            },
-            {
-              "id": "744083f7-47b2-455b-bc7e-4e44287b4000",
-              "type": "RadioGroup",
-              "cli_type": "optional",
-              "group_name": "Choose Option",
-              "required": false,
-              "options": {},
-              "data": {
-                "commands": [
-                  [
-                    "-t",
-                    "--verbozze"
-                  ],
-                  [
-                    "-q",
-                    "--quiet"
-                  ]
-                ],
-                "widgets": [
-                  {
-                    "id": "-t",
-                    "type": "CheckBox",
-                    "cli_type": "optional",
-                    "required": false,
-                    "data": {
-                      "display_name": "verbose",
-                      "help": "Show more details",
-                      "required": false,
-                      "nargs": "",
-                      "commands": [
-                        "-t",
-                        "--verbozze"
-                      ],
-                      "choices": [],
-                      "default": false,
-                      "dest": "verbose"
-                    },
-                    "options": {
-                      "error_color": "#ea7878",
-                      "validator": {
-                        "test": "True",
-                        "message": ""
-                      },
-                      "external_validator": {
-                        "cmd": ""
-                      }
-                    }
-                  },
-                  {
-                    "id": "-q",
-                    "type": "CheckBox",
-                    "cli_type": "optional",
-                    "required": false,
-                    "data": {
-                      "display_name": "quiet",
-                      "help": "Only output on error",
-                      "required": false,
-                      "nargs": "",
-                      "commands": [
-                        "-q",
-                        "--quiet"
-                      ],
-                      "choices": [],
-                      "default": false,
-                      "dest": "quiet"
-                    },
-                    "options": {
-                      "error_color": "#ea7878",
-                      "validator": {
-                        "test": "True",
-                        "message": ""
-                      },
-                      "external_validator": {
-                        "cmd": ""
-                      }
-                    }
-                  }
-                ]
               }
             }
           ],

@@ -28,13 +28,15 @@ def main():
     parser = GooeyParser(description=desc)
     # Add ability to choose a file
     parser.add_argument('file_input',
+                        metavar='File Input',
                         action='store',
-                        help='Name of the file you want to process',
+                        help='Select the file you want to process',
                         widget='FileChooser')
     # Add ability to save the file
     parser.add_argument('output_directory',
+                        metavar='Output Directory',
                         action='store',
-                        help='Where you would like to save the output',
+                        help='Choose where to save the output',
                         widget='DirChooser')
 
     args = parser.parse_args()
@@ -50,15 +52,15 @@ def make_data_frame(file_input):
     return input_df
 
 
-def remove_double_spaces(data_frame):
+def remove_double_spaces(data_input):
     """
     Take the DataFrame and remove consecutive spaces
     """
-    data_frame.replace(to_replace='\s\s', value=' ', regex=True, inplace=True)
-    return data_frame
+    data_input.replace(to_replace='\s\s', value=' ', regex=True, inplace=True)
+    return data_input
 
 
-def save_results(data_frame, output):
+def save_results(summarized_data, output):
     """
     Take all the data and save as Excel file
     """

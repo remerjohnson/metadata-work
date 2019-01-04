@@ -60,8 +60,8 @@
               "cli_type": "positional",
               "required": true,
               "data": {
-                "display_name": "file_input",
-                "help": "Name of the file you want to process",
+                "display_name": "File Input",
+                "help": "Select the file you want to process",
                 "required": true,
                 "nargs": "",
                 "commands": [],
@@ -86,8 +86,8 @@
               "cli_type": "positional",
               "required": true,
               "data": {
-                "display_name": "output_directory",
-                "help": "Where you would like to save the output",
+                "display_name": "Output Directory",
+                "help": "Choose where to save the output",
                 "required": true,
                 "nargs": "",
                 "commands": [],

@@ -16,7 +16,7 @@ folders = [name for name in os.listdir(".") if os.path.isdir(name)]
 # Make a list of the files within the folders
 files = []
 for f in folders:
-    file = os.listdir(f)
+    file = sorted(os.listdir(f))
     files.append(file)
     continue
 
@@ -33,14 +33,32 @@ print("There are",len(files),"total objects")
 # Make a dictionary where the key is the bib/folder, and the value is one or more files
 listing_dict = dict(zip(folders, files))
 
-# Make a dictionary of a dataFrame (using the above dictionary
-dict_of_df = {k: pd.DataFrame(v) for k,v in listing_dict.items()}
+# Make our initial dataframe using the dictionary
+df = pd.DataFrame.from_dict(listing_dict, orient='index', columns=['file_1', 'file_2'])
 
-# Make THAT a dataFrame
-df = pd.concat(dict_of_df)
+# Stack the datafame, reset index
+df2 = df.stack()
+df2 = df2.reset_index()
+df2.index.name = None
+
+# Find duplicates
+arks = df2["level_0"]
+dupe_df = df2[arks.isin(arks[arks.duplicated()])]
+dupe_arks = dupe_df["level_0"]
+dupe_arks = dupe_arks.unique()
+
+# Make the duplicates dataframe
+dupe_df = pd.DataFrame({'level_0':dupe_arks})
+
+# Concatenate the two dataframes
+final_df = pd.concat([df2, dupe_df], sort=True, ignore_index=True)
+
+# Sort so that object header rows are grouped with components
+final_df = final_df.sort_values(by=['level_0','level_1'], na_position='first')
 
 # Give the user a sample of the dataFrame
-print(df[0:50])
+print(final_df[0:50])
 
-# Print out a csv of the dataFrame
-df.to_csv('~/Documents/mb_struct.csv')
+# Print out a csv of the final dataFrame
+final_df.to_csv('~/Documents/md_structured.csv')
+print("Congratulations! I've output a file in your Documents folder called 'md_structured.csv'")

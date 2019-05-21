@@ -65,9 +65,11 @@ def save_results(summarized_data, output):
     Take all the data and save as Excel file
     """
     summarized_data = data_frame
-    output_file = os.path.join(output, "output.xlsx")
-    writer = pd.ExcelWriter(output_file, engine='xlsxwriter')
-    summarized_data.to_excel(writer)
+    #output_file = os.path.join(output, "gooey_output.xlsx")
+    #writer = pd.ExcelWriter(output_file, engine='xlsxwriter')
+    #summarized_data.to_excel(writer)
+    output_file = os.path.join(output, "gooey_output.csv")
+    summarized_data.to_csv(output_file)
 
 
 if __name__ == '__main__':

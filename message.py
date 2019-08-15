@@ -3,19 +3,14 @@ import time
 
 program_message = \
 '''
-Thanks for checking out out my program.
+Thanks for checking out out my program!
 
 Here are the arguments you supplied:
 
 {0}
 
--------------------------------------
-
 This project was made using Gooey. If you'd like to contribute, you can find the
-author's issue tracker on Github[1]. 
-
-[1](https://github.com/chriskiehl/Gooey)
-
+author's issue tracker at https://github.com/chriskiehl/Gooey
 '''
 
 

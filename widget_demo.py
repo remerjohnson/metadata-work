@@ -48,7 +48,7 @@ def make_data_frame(file_input):
     """
     Take the input data file and return a pandas DataFrame
     """
-    input_df = pd.read_csv(file_input)
+    input_df = pd.read_excel(file_input)
     return input_df
 
 
@@ -59,17 +59,26 @@ def remove_double_spaces(data_input):
     data_input.replace(to_replace='\s\s', value=' ', regex=True, inplace=True)
     return data_input
 
+def semicolons_to_pipes(data_input):
+    """
+    Take the DataFrame and within topics, replace commas with pipes
+    """
+    data_input.replace({'Subject:topic': r'[,;]\s'}, {'Subject:topic': ' | '}, regex=True, inplace=True)
+    return data_input
+    
 
 def save_results(summarized_data, output):
     """
     Take all the data and save as Excel file
     """
     summarized_data = data_frame
-    #output_file = os.path.join(output, "gooey_output.xlsx")
-    #writer = pd.ExcelWriter(output_file, engine='xlsxwriter')
-    #summarized_data.to_excel(writer)
-    output_file = os.path.join(output, "gooey_output.csv")
-    summarized_data.to_csv(output_file)
+    output_file = os.path.join(output, "gooey_output.xlsx")
+    writer = pd.ExcelWriter(output_file, engine='xlsxwriter')
+    summarized_data.to_excel(writer)
+    writer.save()
+    # Comment out to switch to csv output
+    #output_file = os.path.join(output, "gooey_output.csv")
+    #summarized_data.to_csv(output_file)
 
 
 if __name__ == '__main__':
@@ -80,6 +89,8 @@ if __name__ == '__main__':
     print("here's a preview\n", df.head())
     # Remove double spaces
     data_frame = remove_double_spaces(df)
+    # Replace semicolons with pipes
+    data_frame = semicolons_to_pipes(df)
     # Save the file as Excel
     print("Saving results data")
     save_results(data_frame, conf.output_directory)

@@ -1,6 +1,10 @@
-# Pyobstruct
+# Metadata Work
 
-This repository has a lot of utilities in their incubation stage. When they are mature, they can move to dedicated repositories.  
+This repository is a general holding place for a lot of the work I've done in metadata services. It contains documentation (in the `/documentation` folder), a lot of coding projects in their incubation stage. When they are mature, they may move to dedicated repositories.  
+
+The documentation tends to be Jupyter notebooks that describe a process I've done, typically in `pandas` or another python library, in order to work with data.  
+
+# Coding Projects
 
 ## `pyobstruct` 
 

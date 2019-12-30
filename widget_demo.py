@@ -46,11 +46,17 @@ def main():
 
 def make_data_frame(file_input):
     """
-    Take the input data file and return a pandas DataFrame
+    Take the input data file (assuming Excel) and return a pandas DataFrame
     """
     input_df = pd.read_excel(file_input)
     return input_df
 
+def trim_spaces(data_input):
+    """
+    Take the DataFrame and remove surrounding spaces on values
+    """
+    data_input.replace('(^\s+|\s+$)', '', regex=True, inplace=True)
+    return data_input
 
 def remove_double_spaces(data_input):
     """
@@ -59,13 +65,32 @@ def remove_double_spaces(data_input):
     data_input.replace(to_replace='\s\s', value=' ', regex=True, inplace=True)
     return data_input
 
-def semicolons_to_pipes(data_input):
+def delimiters_to_pipes(data_input):
     """
     Take the DataFrame and within topics, replace commas with pipes
     """
     data_input.replace({'Subject:topic': r'[,;]\s'}, {'Subject:topic': ' | '}, regex=True, inplace=True)
     return data_input
     
+def process_dates(data_input):
+    """
+    Try to handle dates, and start to populate the Begin + End Date columns
+    """
+    date_begin = []
+    date_end = []
+    columns = data_input.columns
+    for column in columns:
+        if column.lower().startswith("date"):
+            for row in data_input[column]:
+                if len(str(row)) == 4:
+                    date_begin.append(str(row) + "-01-01")
+                    date_end.append(str(row) + "-12-31")
+                else:
+                    date_begin.append("")
+                    date_end.append("")
+    data_input['date:begin'] = date_begin
+    data_input['date:end'] = date_end                
+    return data_input
 
 def save_results(summarized_data, output):
     """
@@ -74,7 +99,7 @@ def save_results(summarized_data, output):
     summarized_data = data_frame
     output_file = os.path.join(output, "gooey_output.xlsx")
     writer = pd.ExcelWriter(output_file, engine='xlsxwriter')
-    summarized_data.to_excel(writer)
+    summarized_data.to_excel(writer, index=False)
     writer.save()
     # Comment out to switch to csv output
     #output_file = os.path.join(output, "gooey_output.csv")
@@ -84,13 +109,17 @@ def save_results(summarized_data, output):
 if __name__ == '__main__':
     conf = main()
     input_file = conf.file_input
-    print('Thanks for choosing this file: ' + str(input_file))
+    print('You chose this file: ' + str(input_file))
     df = make_data_frame(conf.file_input)
-    print("here's a preview\n", df.head())
+    print("Here's a preview:\n", df.head())
+    # Strip spaces
+    data_frame = trim_spaces(df)
     # Remove double spaces
     data_frame = remove_double_spaces(df)
     # Replace semicolons with pipes
-    data_frame = semicolons_to_pipes(df)
+    data_frame = delimiters_to_pipes(df)
+    # Begin to populate Begin and End Date
+    data_frame = process_dates(df)
     # Save the file as Excel
     print("Saving results data")
     save_results(data_frame, conf.output_directory)

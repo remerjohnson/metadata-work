@@ -9,8 +9,7 @@ Here are the arguments you supplied:
 
 {0}
 
-This project was made using Gooey. If you'd like to contribute, you can find the
-author's issue tracker at https://github.com/chriskiehl/Gooey
+
 '''
 
 

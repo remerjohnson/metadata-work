@@ -10,7 +10,7 @@ Made with Gooey:
                            __/ |
                           |___/
 
-This will automagically perform common metadata
+This program will automagically perform common metadata
 operations on files, making a GUI via Gooey
 """
 
@@ -21,9 +21,9 @@ from argparse import ArgumentParser
 from gooey import Gooey, GooeyParser
 
 
-@Gooey(dump_build_config=True, program_name='Gooey Data')
+@Gooey(dump_build_config=False, program_name='DOMMinator')
 def main():
-    desc = 'A Gooey app that runs standard metadata processes'
+    desc = 'A Gooey (GUI) app that runs standard metadata processes'
 
     parser = GooeyParser(description=desc)
     # Add ability to choose a file

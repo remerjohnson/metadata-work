@@ -117,5 +117,8 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
+# VScode
+.vscode/
+
 # Goeey stuff
 gooey_config*

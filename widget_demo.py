@@ -17,6 +17,8 @@ operations on files, making a GUI via Gooey
 from message import display_message
 import pandas as pd
 import os
+from dateparser.search import search_dates
+from dateparser import parse
 from argparse import ArgumentParser
 from gooey import Gooey, GooeyParser
 
@@ -85,11 +87,19 @@ def process_dates(data_input):
                 if len(str(row)) == 4:
                     date_begin.append(str(row) + "-01-01")
                     date_end.append(str(row) + "-12-31")
-                else:
+                elif len(str(row)) == 10:
+                    date_begin.append(str(row))
+                    date_end.append(str(row))
+                elif pd.isnull(row) == True:
                     date_begin.append("")
                     date_end.append("")
-    data_input['date:begin'] = date_begin
-    data_input['date:end'] = date_end                
+                else:
+                    parsed_begin = parse(str(row), settings={'PREFER_DAY_OF_MONTH': 'first'})
+                    parsed_end = parse(str(row), settings={'PREFER_DAY_OF_MONTH': 'last'})
+                    date_begin.append(str(parsed_begin))
+                    date_end.append(str(parsed_end))
+    data_input['Begin date'] = date_begin
+    data_input['End date'] = date_end                
     return data_input
 
 def save_results(summarized_data, output):

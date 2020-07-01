@@ -63,12 +63,12 @@ cc_sa.set_index(['Object Unique ID'], inplace=True)
 
 
 """
-Make a function to feed the DataFrames to make our samples
+Make a function to subset our DataFrames to a sample of 500 unique objects
 """
 def subsetDf(data_input):
     """
     Take a DataFrame and if it's under 500 unique objects, simply return it. 
-    If the DataFrame is over 500 unique objects, it will return the first 
+    If the DataFrame is over 500 unique objects, return the first 
     500 unique objects. 
     """
     unique_obj = data_input.index.unique()
@@ -93,24 +93,38 @@ folders = ['Public Domain','Attribution','Attribution-NonCommercial','Attributio
 for folder in folders:
     os.mkdir(os.path.join(parent_dir,folder))
 
-# Call our subset function on each DataFrame and output to appropriate folder
+# Call our subset function on each DataFrame and output each spreadsheet to the appropriate folder
 cil_pd = subsetDf(cil_pd)
-cil_pd.to_csv('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Public Domain/OLR_1.csv')
+writer = pd.ExcelWriter('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Public Domain/OLR_1.xlsx', engine ='xlsxwriter')  
+cil_pd.to_excel(writer, sheet_name ='Item description')
+writer.save()
 
 cc_by = subsetDf(cc_by)
-cc_by.to_csv('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution/OLR_1.csv')
+writer = pd.ExcelWriter('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution/OLR_1.xlsx', engine ='xlsxwriter')  
+cc_by.to_excel(writer, sheet_name ='Item description')
+writer.save()
 
 cc_nc = subsetDf(cc_nc)
-cc_nc.to_csv('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NonCommercial/OLR_1.csv')
+writer = pd.ExcelWriter('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NonCommercial/OLR_1.xlsx', engine ='xlsxwriter')  
+cc_nc.to_excel(writer, sheet_name ='Item description')
+writer.save()
 
 cc_nd = subsetDf(cc_nd)
-cc_nc.to_csv('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NoDerivs/OLR_1.csv')
+writer = pd.ExcelWriter('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NoDerivs/OLR_1.xlsx', engine ='xlsxwriter')  
+cc_nd.to_excel(writer, sheet_name ='Item description')
+writer.save()
 
 cc_nc_nd = subsetDf(cc_nc_nd)
-cc_nc.to_csv('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NonCommercial-NoDerivs/OLR_1.csv')
+writer = pd.ExcelWriter('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NonCommercial-NoDerivs/OLR_1.xlsx', engine ='xlsxwriter')  
+cc_nc_nd.to_excel(writer, sheet_name ='Item description')
+writer.save()
 
 cc_nc_sa = subsetDf(cc_nc_sa)
-cc_nc.to_csv('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NonCommercial-ShareAlike/OLR_1.csv')
+writer = pd.ExcelWriter('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-NonCommercial-ShareAlike/OLR_1.xlsx', engine ='xlsxwriter')  
+cc_nc_sa.to_excel(writer, sheet_name ='Item description')
+writer.save()
 
 cc_sa = subsetDf(cc_sa)
-cc_nc.to_csv('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-ShareAlike/OLR_1.csv')
+writer = pd.ExcelWriter('/mnt/rdcp-staging/rdcp-0126-cil-staging-qa/Spreadsheet_Subsetting/cil_harvest_2019-09-13/OLR/Attribution-ShareAlike/OLR_1.xlsx', engine ='xlsxwriter')
+cc_sa.to_excel(writer, sheet_name ='Item description')
+writer.save()
